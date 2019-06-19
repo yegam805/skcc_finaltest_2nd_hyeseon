@@ -504,4 +504,15 @@ MariaDB [test]> show tables;
 
 MariaDB [test]>
 ```
-
+# Install C-M Capture
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/05.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/06.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/07.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/11.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/12.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/15.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/16.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/19.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/21.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/24.PNG)
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab1_pic/25.PNG)
