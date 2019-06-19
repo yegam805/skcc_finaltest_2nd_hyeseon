@@ -1,10 +1,3 @@
-15.164.126.247    172.31.15.8
-15.164.131.212    172.31.13.189
-15.164.131.84     172.31.3.229
-15.164.132.44     172.31.11.25
-15.164.135.119    172.31.6.157
-
-
 # 1. Enable user / password login for each of the 5 nodes
 
 ## a. Create a password for user “centos”
@@ -459,3 +452,56 @@ sudo tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log
 2019-06-19 05:30:47,968 INFO WebServerImpl:com.cloudera.server.cmf.WebServerImpl: Started Jetty server.
 2019-06-19 05:30:51,502 INFO ScmActive-0:com.cloudera.server.cmf.components.ScmActive: ScmActive completed successfully.
 ```
+## MySQL crate the sample tables
+mysql -u root -p
+grant all privileges on *.* to training@'%' identified by 'training';
+
+```
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privileges on *.* to training@'%' identified by 'training';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> exit;
+Bye
+```
+CREATE DATABASE test ;
+```
+MariaDB [(none)]> CREATE DATABASE test;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| amon               |
+| cdh                |
+| hive               |
+| hue                |
+| metastore          |
+| mysql              |
+| nav                |
+| navms              |
+| oozie              |
+| performance_schema |
+| rman               |
+| scm                |
+| sentry             |
+| test               |
++--------------------+
+15 rows in set (0.00 sec)
+```
+```
+MariaDB [test]> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| authors        |
+| posts          |
++----------------+
+2 rows in set (0.00 sec)
+
+MariaDB [test]>
+```
+
