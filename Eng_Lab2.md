@@ -23,6 +23,7 @@ where a.status = 'Active';
 9	A100016	Basic Checking	Active	639	49429
 10	A100018	Basic Checking	Active	63563	-13495
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q1.PNG)
 
 # 2. Create external table
 ```
@@ -42,12 +43,13 @@ fields terminated by ','
 location 'hdfs://localhost:8020/user/training/problem2/data/employee';
 ```
 # 3. nagative account balances
-
+```
 select a.custid, c.fname , c.lname, c.hphone
 from account a 
     ,customer c
 where a.amount < 0.0 
 and a.custid = c.id;
+```
 ```
  	a.custid	c.fname	c.lname	c.hphone
 1	10001	Sybil	Wiley	(504) 780-0366
@@ -61,6 +63,7 @@ and a.custid = c.id;
 9	10046	Olga	Hall	(615) 645-2920
 10	10053	Jonah	Alvarado	(578) 584-0882
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q3.PNG)
 
 # 4. Combine the two customer list into a single dataset
 ```
@@ -75,13 +78,11 @@ zip string
 ) 
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t;'
-LOCATION 'hdfs://localhost:8020/user/training/problem4/data/employee1'
-;
+LOCATION 'hdfs://localhost:8020/user/training/problem4/data/employee1';
 
 select * from employee1 limit 10;
 ```
 ```
-
  	employee1.id	employee1.fname	employee1.lname	employee1.address	employee1.city	employee1.state	employee1.zip
 1	10000000	Olga	Booker	Ap #643-2741 Proin Street	Gresham	OR	42593-0000
 2	10000001	Raja	Spence	P.O. Box 765, 7700 Eros Rd.	Duluth	MN	67110-0000
@@ -93,8 +94,8 @@ select * from employee1 limit 10;
 8	10000007	Elton	Conrad	P.O. Box 787, 8889 Nam Street	Auburn	ME	28280-0000
 9	10000008	Ryan	Keith	6857 Et Ave	Springfield	MA	58872-0000
 10	10000009	Griffin	Combs	Ap #266-8677 Nulla Street	Ketchikan	AK	99904-0000
-
- ```
+```
+```
 CREATE EXTERNAL TABLE employee2 (
 id string,
 num string,
@@ -107,9 +108,8 @@ zip string
 ) 
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
-LOCATION 'hdfs://localhost:8020/user/training/problem4/data/employee2'
-;
-
+LOCATION 'hdfs://localhost:8020/user/training/problem4/data/employee2';
+```
 ```
  	employee2.id	employee2.num	employee2.lname	employee2.fname	employee2.address	employee2.city	employee2.state	employee2.zip
 1	10010000	656	HULL	WARREN	7593 Pede. Rd.	Kansas City	MO	55725
@@ -122,7 +122,6 @@ LOCATION 'hdfs://localhost:8020/user/training/problem4/data/employee2'
 8	10010007	832	DANIEL	MAYA	"P.O. Box 780	 6779 Mattis. St."	Springfield	MO
 9	10010008	150	BEARD	COLBY	"P.O. Box 986	 6923 Nam St."	Aurora	IL
 10	10010009	164	OLSEN	HEIDI	"P.O. Box 643	 1513 Et	 St."	Warren
-
 ```
 ```
 CREATE EXTERNAL TABLE solution (
@@ -136,8 +135,7 @@ zip string
 ) 
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t;'
-LOCATION 'hdfs://localhost:8020/user/training/problem4/solution'
-;
+LOCATION 'hdfs://localhost:8020/user/training/problem4/solution';
 
 INSERT OVERWRITE TABLE solution
 select * from (
@@ -161,6 +159,7 @@ select * from solution limit 10;
 7	10010079	Ursa	Justice	3321 Risus. Ave	San Jose	CA	96850
 8	10010088	Declan	Booth	4048 Nunc Rd.	San Francisco	CA	96324
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q4.PNG)
 
 # 5. customers and employees who live in Palo Alto, CA
 ```
@@ -200,6 +199,8 @@ and state = 'CA'
 9	Griffin	Pate	Palo Alto	CA
 10	Burton	Hayes	Palo Alto	CA
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q5.PNG)
+
 # 6.  remoe any age information from the employee ( month/day/year->month/day)
 ```
 CREATE EXTERNAL TABLE solution (
@@ -241,6 +242,7 @@ select * from solution limit 10;
 9	10000008	Briar	Anderson	Ap #548-6452 Nunc Road	Cleveland	OH	90704	08/18
 10	10000009	Cole	Odom	P.O. Box 962, 2496 Sodales St.	Boston	MA	27282	08/21
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q6.PNG)
 
 # 7. Generate report (seattle, fname, space, lname)
 ```
@@ -255,6 +257,8 @@ order by name asc;
 2	Zeph Horn
 3	Zeph Mcclain
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q7.PNG)
+
 # 8. Sqoop to export customer data from HDFS into MySQL
 
 ##  8-1. data export
@@ -460,6 +464,8 @@ java.lang.InterruptedException
 19/06/19 00:14:15 INFO mapreduce.ExportJobBase: Transferred 18.4443 KB in 26.0277 seconds (725.6507 bytes/sec)
 19/06/19 00:14:15 INFO mapreduce.ExportJobBase: Exported 100 records.
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q8-1.PNG)
+
 ## 8-2. show mysql table data
 ```
 [training@localhost ~]$ mysql -u training -p
@@ -506,6 +512,8 @@ mysql> select * from solution limit 10;
 +----------+--------+----------+--------------------------------+-------------+-------+-------+------------+
 10 rows in set (0.00 sec)
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q8-2.PNG)
+
 # 9. Addition of the letter 'A' to Customer IDs
 
 ```
@@ -548,6 +556,7 @@ select * from solution limit 10;
 9	A1000008	Brynn	Pennington	Ap #968-9936 Eleifend Avenue	Lincoln	NE	89536	08/23/2016
 10	A1000009	Ava	Noble	P.O. Box 955, 1459 Urna St.	Baton Rouge	LA	34822	08/08/2016
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q9.PNG)
 
 # 10. CUSTOMER AND BILLING DATA JOIN
 ```
@@ -590,3 +599,4 @@ where c.id = b.id;
 9	1000008	Brynn	Pennington	Lincoln	NE	289.66000000000003	2017-03-26
 10	1000009	Ava	Noble	Baton Rouge	LA	928.67999999999995	2016-12-12
 ```
+![Screenshot](https://github.com/hayul1201/skcc_finaltest_2nd_hyeseon/blob/master/lab2_pig/Q10.PNG)
