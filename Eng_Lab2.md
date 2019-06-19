@@ -25,6 +25,7 @@ where a.status = 'Active';
 ```
 
 # 2. Create external table
+```
 CREATE EXTERNAL TABLE employee(
  id 		int,
  fname 		string,
@@ -39,7 +40,7 @@ CREATE EXTERNAL TABLE employee(
 row format delimited 
 fields terminated by ','
 location 'hdfs://localhost:8020/user/training/problem2/data/employee';
-
+```
 # 3. nagative account balances
 
 select a.custid, c.fname , c.lname, c.hphone
