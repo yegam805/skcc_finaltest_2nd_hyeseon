@@ -1,3 +1,29 @@
+# 1. Active account's balance to the average balance of all actie account of the same type.
+```
+select a.id, a.type, a.status, a.amount, (t.type_avg-a.amount) difference
+from  account a 
+ left outer join (select type
+            ,sum(amount) as type_sum
+            ,avg(amount) as type_avg
+        from account 
+        where status = 'Active'
+    group by type) t on t.type = a.type
+where a.status = 'Active';
+```
+```
+ 	a.id	a.type	a.status	a.amount	difference
+1	A100000	Basic Checking	Active	44539	5529
+2	A100002	Basic Checking	Active	11483	38585
+3	A100003	Student Checking	Active	26132	24127.631578947367
+4	A100007	Student Checking	Active	71661	-21401.368421052633
+5	A100009	Savings	Active	65536	-17498.36363636364
+6	A100010	Savings	Active	40778	7259.6363636363603
+7	A100011	Savings	Active	57953	-9915.3636363636397
+8	A100013	Basic Checking	Active	45654	4414
+9	A100016	Basic Checking	Active	639	49429
+10	A100018	Basic Checking	Active	63563	-13495
+```
+
 # 2. Create external table
 CREATE EXTERNAL TABLE employee(
  id 		int,
