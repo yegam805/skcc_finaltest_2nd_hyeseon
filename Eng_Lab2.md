@@ -479,4 +479,87 @@ mysql> select * from solution limit 10;
 +----------+--------+----------+--------------------------------+-------------+-------+-------+------------+
 10 rows in set (0.00 sec)
 ```
+# 9. Addition of the letter 'A' to Customer IDs
 
+```
+CREATE EXTERNAL TABLE solution (
+	id 		    string,
+    fname 		string,
+    lname		string,
+    address 	string,
+    city 		string,
+    state 		string,
+    zip		string,
+    birthday	string )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t;'
+LOCATION 'hdfs://localhost:8020/user/training/problem9/solution';
+
+INSERT OVERWRITE TABLE solution
+select concat("A",id) as id
+       , fname
+       , lname
+       ,address
+       ,city
+       ,state
+       ,zip
+       ,birthday
+from customer;
+
+select * from solution limit 10;
+```
+```
+ 	solution.id	solution.fname	solution.lname	solution.address	solution.city	solution.state	solution.zip	solution.birthday
+1	A1000000	Medge	Roach	P.O. Box 799, 6865 Nec Rd.	Racine	WI	56336	08/10/2016
+2	A1000001	Nasim	Stone	P.O. Box 975, 759 Scelerisque Street	Tuscaloosa	AL	36696	08/16/2016
+3	A1000002	Jolie	Schneider	P.O. Box 829, 9011 Vulputate St.	Kapolei	HI	59913	08/22/2016
+4	A1000003	Lacota	Molina	Ap #831-2124 Pharetra. Avenue	Philadelphia	PA	84716	08/24/2016
+5	A1000004	Blaine	Sweet	P.O. Box 151, 7847 Pede. St.	Topeka	KS	66452	08/21/2016
+6	A1000005	Lesley	Bird	P.O. Box 569, 6635 Maecenas St.	Dallas	TX	87918	08/26/2016
+7	A1000006	Sydnee	Howell	P.O. Box 147, 3714 Dignissim Street	Dallas	TX	94072	08/11/2016
+8	A1000007	Jermaine	Griffin	Ap #859-2722 Donec Rd.	Baltimore	MD	13392	08/10/2016
+9	A1000008	Brynn	Pennington	Ap #968-9936 Eleifend Avenue	Lincoln	NE	89536	08/23/2016
+10	A1000009	Ava	Noble	P.O. Box 955, 1459 Urna St.	Baton Rouge	LA	34822	08/08/2016
+```
+
+# 10. CUSTOMER AND BILLING DATA JOIN
+```
+CREATE EXTERNAL TABLE solution(
+id int, 
+fname string, 
+lname string, 
+city string, 
+state string, 
+charge double, 
+billdate string
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t;'
+LOCATION 'hdfs://localhost:8020/user/training/problem10/solution'
+;
+
+INSERT OVERWRITE TABLE solution
+select c.id
+     , c.fname
+     , c.lname
+     , c.city
+     , c.state
+     , b.charge
+     , substr(b.tstamp, 1, 10) as billdata
+from customer c
+    ,billing b
+where c.id = b.id;
+```
+```
+ 	solution.id	solution.fname	solution.lname	solution.city	solution.state	solution.charge	solution.billdate
+1	1000000	Medge	Roach	Racine	WI	15.789999999999999	2017-03-05
+2	1000001	Nasim	Stone	Tuscaloosa	AL	57.729999999999997	2016-09-05
+3	1000002	Jolie	Schneider	Kapolei	HI	556.03999999999996	2017-02-06
+4	1000003	Lacota	Molina	Philadelphia	PA	654.63	2016-12-01
+5	1000004	Blaine	Sweet	Topeka	KS	287.12	2017-05-30
+6	1000005	Lesley	Bird	Dallas	TX	900.13999999999999	2016-10-26
+7	1000006	Sydnee	Howell	Dallas	TX	347.88	2016-10-04
+8	1000007	Jermaine	Griffin	Baltimore	MD	754.84000000000003	2017-08-01
+9	1000008	Brynn	Pennington	Lincoln	NE	289.66000000000003	2017-03-26
+10	1000009	Ava	Noble	Baton Rouge	LA	928.67999999999995	2016-12-12
+```
